@@ -18,7 +18,6 @@ exports.insection = (
   } = {}
 ) => {
   // detect browser support for scroll animation with intersect //
-  console.log(threshold);
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||
@@ -33,11 +32,11 @@ exports.insection = (
     );
     return false;
   } else {
-    window.document.body.classList.add("intersect");
+    window.document.body.classList.add("insection");
   }
   let selectorClass = "." + selector;
   let selInit = window.document.querySelectorAll(
-    "body.intersect " + selectorClass
+    "body.insection " + selectorClass
   );
 
   if (selInit.length > 0) {

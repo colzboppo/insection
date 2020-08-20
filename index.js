@@ -1,5 +1,10 @@
+// selector = selection for intersect //
+// context = selector (body by default) //
+// contextClass = class to add to context when any intersect occurs (global) //
+// threshold = threshold of intersection //
+
 exports.insection = (selector) => {
-  // detect browser support for scroll animation with intersect
+  // detect browser support for scroll animation with intersect //
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||
@@ -18,7 +23,7 @@ exports.insection = (selector) => {
     );
     return false;
   }
-  let selectorClass = selector.replace(/$\./, "");
+  let selectorClass = selector.replace(/^\./, "");
   let selInit = document.querySelectorAll(
     "body:not(.no-intersect) " + selector
   );

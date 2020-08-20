@@ -6,5 +6,7 @@ Module that accepts and monitors a selector for intersection with the viewport (
 
 ## usage
 
-``` require("insection") 
-insection(".selector-to-use") ```
+``` 
+const ins = require("insection") 
+insection(".selector-to-use") 
+```

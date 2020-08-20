@@ -1,0 +1,23 @@
+{
+  "name": "insection",
+  "version": "1.0.0",
+  "description": "Module that accepts and monitors a selector for intersection with the viewport (scroll into view) in vanillaJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colzboppo/insection.git"
+  },
+  "keywords": [
+    "js",
+    "intersectApi"
+  ],
+  "author": "colin bradshaw",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/colzboppo/insection/issues"
+  },
+  "homepage": "https://github.com/colzboppo/insection#readme"
+}

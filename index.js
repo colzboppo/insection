@@ -9,7 +9,7 @@
 exports.insection = (
   selector,
   {
-    context = window.document.body,
+    context = null,
     contextClass = "",
     threshold = 1,
     persist = true,
@@ -18,7 +18,7 @@ exports.insection = (
   } = {}
 ) => {
   // detect browser support for scroll animation with intersect //
-
+  console.log(threshold);
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||

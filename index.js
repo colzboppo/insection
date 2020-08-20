@@ -9,8 +9,8 @@
 exports.insection = (
   selector,
   {
-    context = null,
-    contextClass = null,
+    context = window.document.body,
+    contextClass = "",
     threshold = 1,
     persist = true,
     cueFix = "cue",

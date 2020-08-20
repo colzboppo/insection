@@ -3,8 +3,12 @@
 // contextClass = class to add to context when any intersect occurs (global) //
 // threshold = threshold of intersection //
 
+const Window = require("window");
+
 exports.insection = (selector) => {
   // detect browser support for scroll animation with intersect //
+  const window = new Window();
+  let document = window.document;
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||

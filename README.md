@@ -9,6 +9,6 @@ Module that accepts and monitors a selector for intersection with the viewport (
 ## usage
 
 ``` 
-const ins = require("insection") 
+const { insection } = require("@colzboppo/insection");
 insection("selector-to-use") 
 ```

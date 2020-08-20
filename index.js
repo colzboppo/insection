@@ -28,6 +28,7 @@ exports.insection = (selector, scrollover) => {
   let selInit = window.document.querySelectorAll(
     "body:not(.no-intersect) " + selector
   );
+  window.document.body.classList.add("intersect");
 
   if (selInit.length > 0) {
     // this is the target which is observed
@@ -44,7 +45,7 @@ exports.insection = (selector, scrollover) => {
       rootMargin: "20px",
       threshold: 0.75, // percentage of object to intersect as threshold
     };
-    console.log(selInit, selectorClas, selStart);
+    console.log(selInit, selectorClass, selStart);
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

@@ -2,12 +2,23 @@
 // context = selector (body by default) //
 // contextClass = class to add to context when any intersect occurs (global) //
 // threshold = threshold of intersection //
+// persist = true, if set to false it will not set unobserve and reset to -cue/-vue class when in/out of viewport //
 
-exports.insection = (selector) => {
+// add options parameters with default values //
+
+exports.insection = (
+  selector,
+  {
+    context = null,
+    contextClass = null,
+    threshold = 1,
+    persist = true,
+    cueFix = "cue",
+    vueFix = "vue",
+  }
+) => {
   // detect browser support for scroll animation with intersect //
 
-  let cueSfix = "cue",
-    vueSfix = "vue";
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||
@@ -34,31 +45,46 @@ exports.insection = (selector) => {
     for (let selEl of selInit) {
       // cue up animations (no-JS friendly) //
       selEl.classList.remove(selector);
-      selEl.classList.add(selector + "-" + cueSfix);
+      selEl.classList.add(selector + "-" + cueFix);
     }
 
     let selStart = window.document.querySelectorAll(
-      selectorClass + "-" + cueSfix
+      selectorClass + "-" + cueFix
     );
     // configure the intersection observer instance
     let intersectionObserverOptions = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 0.75, // percentage of object to intersect as threshold
+      root: context,
+      rootMargin: "0px 0px 0px 0px",
+      threshold: threshold, // percentage of object to intersect as threshold
     };
 
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        entry.target.classList.toggle(
-          selector + "-" + vueSfix,
-          entry.intersectionRatio > 0
-        );
-        if (entry.intersectionRatio > 0) {
-          // Start Anim / Stop watching //
-          entry.target.classList.remove(selector + "-" + cueSfix);
-          observer.unobserve(entry.target);
+        let overThreshold = entry.intersectionRatio >= threshold;
+        if (persist) {
+          // toggles -vue class
+          entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
+          entry.target.classList.remove(selector + "-" + cueFix, overThreshold);
+          if (overThreshold) {
+            observer.unobserve(entry.target);
+          }
+        } else {
+          // toggles -cue class
+          entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
+          entry.target.classList.toggle(selector + "-" + cueFix, overThreshold);
         }
+
+        // if (entry.intersectionRatio > 0) {
+        //   // Start Anim / Stop watching //
+        //   entry.target.classList.remove(selector + "-" + cueFix);
+        //   if (persist) {
+        //     observer.unobserve(entry.target);
+        //   }
+        // } else if (!persist) {
+        //   entry.target.classList.add(selector + "-" + cueFix);
+        //   entry.target.classList.remove(selector + "-" + vueFix);
+        // }
       });
     }, intersectionObserverOptions);
     for (let selEl of selStart) {

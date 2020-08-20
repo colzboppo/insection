@@ -1,6 +1,6 @@
 {
   "name": "@colzboppo/insection",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Module that accepts and monitors a selector for intersection with the viewport (scroll into view) in vanillaJS",
   "main": "index.js",
   "scripts": {

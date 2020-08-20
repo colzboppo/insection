@@ -38,14 +38,14 @@ exports.insection = (selector, scrollover) => {
       selEl.classList.add(selectorClass + "-start");
     }
 
-    let selStart = window.document.querySelectorAll(selectorClass + "-start");
+    let selStart = window.document.querySelectorAll(selector + "-start");
     // configure the intersection observer instance
     let intersectionObserverOptions = {
       root: null,
       rootMargin: "20px",
       threshold: 0.75, // percentage of object to intersect as threshold
     };
-    console.log(selInit, selectorClass, selStart);
+
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

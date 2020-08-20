@@ -15,6 +15,10 @@ const { insection } = require("@colzboppo/insection");
 insection("selector") 
 ```
 
+### Options
+
+An optional set of config parameters can be passed to the module when instantiating, example: `insection("selector",{persist:false})`
+
 Insection will replace `selector` class and add `selector-cue` class onto any html elements that match the selector.
 
 Insection will replace the class with `selector-vue` when the element is either scrolled into view, or already in view.

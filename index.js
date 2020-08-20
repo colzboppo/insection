@@ -4,8 +4,6 @@
 // threshold = threshold of intersection //
 // persist = true, if set to false it will not set unobserve and reset to -cue/-vue class when in/out of viewport //
 
-// add options parameters with default values //
-
 exports.insection = (
   selector,
   {
@@ -73,17 +71,6 @@ exports.insection = (
           entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
           entry.target.classList.toggle(selector + "-" + cueFix, overThreshold);
         }
-
-        // if (entry.intersectionRatio > 0) {
-        //   // Start Anim / Stop watching //
-        //   entry.target.classList.remove(selector + "-" + cueFix);
-        //   if (persist) {
-        //     observer.unobserve(entry.target);
-        //   }
-        // } else if (!persist) {
-        //   entry.target.classList.add(selector + "-" + cueFix);
-        //   entry.target.classList.remove(selector + "-" + vueFix);
-        // }
       });
     }, intersectionObserverOptions);
     for (let selEl of selStart) {

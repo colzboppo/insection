@@ -44,6 +44,7 @@ exports.insection = (selector, scrollover) => {
       rootMargin: "20px",
       threshold: 0.75, // percentage of object to intersect as threshold
     };
+    console.log(selInit, selectorClas, selStart);
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

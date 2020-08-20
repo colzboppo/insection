@@ -20,7 +20,5 @@
     "url": "https://github.com/colzboppo/insection/issues"
   },
   "homepage": "https://github.com/colzboppo/insection#readme",
-  "dependencies": {
-    "window": "^4.2.7"
-  }
+  "dependencies": {}
 }

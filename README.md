@@ -5,5 +5,6 @@ Module that accepts and monitors a selector for intersection with the viewport (
 ```npm install @colzboppo/insection```
 
 ## usage
-```require("insection")
+
+```require("insection") 
 insection(".selector-to-use")```

@@ -3,7 +3,7 @@
 // contextClass = class to add to context when any intersect occurs (global) //
 // threshold = threshold of intersection //
 
-exports.insection = (selector) => {
+exports.insection = (selector, scrollover) => {
   // detect browser support for scroll animation with intersect //
 
   if (
@@ -47,10 +47,7 @@ exports.insection = (selector) => {
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        entry.target.classList.toggle(
-          selectorClass,
-          entry.intersectionRatio > 0
-        );
+        entry.target.classList.toggle(scrollover, entry.intersectionRatio > 0);
         if (entry.intersectionRatio > 0) {
           // Start Anim / Stop watching //
           entry.target.classList.remove(selectorClass + "-start");

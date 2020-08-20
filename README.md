@@ -15,7 +15,8 @@ const { insection } = require("@colzboppo/insection");
 insection("selector") 
 ```
 
-## Options
+
+### Options
 
 An optional set of config parameters can be passed to the module when instantiating, example: `insection("selector",{persist:false})`
 

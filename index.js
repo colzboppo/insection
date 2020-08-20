@@ -64,8 +64,8 @@ exports.insection = (
         if (persist) {
           // toggles -vue class
           entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
-          entry.target.classList.remove(selector + "-" + cueFix, overThreshold);
           if (overThreshold) {
+            entry.target.classList.remove(selector + "-" + cueFix);
             observer.unobserve(entry.target);
           }
         } else {

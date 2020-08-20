@@ -61,19 +61,11 @@ exports.insection = (selector) => {
       // provide the observer with a target
       observer.observe(selEl);
     }
-
-    // let headerEL = document.querySelector("header.enha-header");
-    // let sentinalEL = document.querySelector(".sentinal-watcher");
-    // // instantiate our sticky header observer
-    // let stickyObserver = new IntersectionObserver((entries) => {
-    //   if (!entries[0].intersectionRatio > 0) {
-    //     headerEL.classList.add("fixed");
-    //     document.body.classList.add("fixed-header");
-    //   } else {
-    //     headerEL.classList.remove("fixed");
-    //     document.body.classList.remove("fixed-header");
-    //   }
-    // });
-    // stickyObserver.observe(sentinalEL);
+  } else {
+    console.log(
+      selInit,
+      "No elements found with provided selector, returning."
+    );
+    return false;
   }
 };

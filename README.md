@@ -8,7 +8,7 @@ Module that accepts and monitors a selector for intersection with the viewport (
 
 ## usage
 
-To include in your code copy/paste this
+Add this to your `app.js`
 
 ```
 const { insection } = require("@colzboppo/insection");

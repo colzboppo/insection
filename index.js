@@ -3,18 +3,15 @@
 // contextClass = class to add to context when any intersect occurs (global) //
 // threshold = threshold of intersection //
 
-const Window = require("window");
-
 exports.insection = (selector) => {
   // detect browser support for scroll animation with intersect //
-  const window = new Window();
-  let document = window.document;
+
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||
     !("intersectionRatio" in window.IntersectionObserverEntry.prototype)
   ) {
-    document.body.classList.add("no-intersect");
+    window.document.body.classList.add("no-intersect");
     console.log("intersectionApi not supported in current browser");
   } else if (
     selector.length < 1 ||
@@ -28,7 +25,7 @@ exports.insection = (selector) => {
     return false;
   }
   let selectorClass = selector.replace(/^\./, "");
-  let selInit = document.querySelectorAll(
+  let selInit = window.document.querySelectorAll(
     "body:not(.no-intersect) " + selector
   );
 
@@ -40,7 +37,7 @@ exports.insection = (selector) => {
       selEl.classList.add(selectorClass + "-start");
     }
 
-    let selStart = document.querySelectorAll(selectorClass + "-start");
+    let selStart = window.document.querySelectorAll(selectorClass + "-start");
     // configure the intersection observer instance
     let intersectionObserverOptions = {
       root: null,

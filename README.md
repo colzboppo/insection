@@ -15,9 +15,9 @@ const { insection } = require("@colzboppo/insection");
 insection("selector") 
 ```
 
-Insection will add `selector-cue` onto any html elements that match the given selector class.
+Insection will replace `selector` class and add `selector-cue` class onto any html elements that match the selector.
 
-Insection will replace this with `selector-vue` when the element is either scrolled into view, or already in view.
+Insection will replace the class with `selector-vue` when the element is either scrolled into view, or already in view.
 
 You can then add CSS styles and animations with the classes provided to reflect items coming into view.
 

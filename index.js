@@ -3,16 +3,18 @@
 // contextClass = class to add to context when any intersect occurs (global) //
 // threshold = threshold of intersection //
 
-exports.insection = (selector, scrollover) => {
+exports.insection = (selector) => {
   // detect browser support for scroll animation with intersect //
 
+  let cueSfix = "cue",
+    vueSfix = "vue";
   if (
     !("IntersectionObserver" in window) ||
     !("IntersectionObserverEntry" in window) ||
     !("intersectionRatio" in window.IntersectionObserverEntry.prototype)
   ) {
-    window.document.body.classList.add("no-intersect");
     console.log("intersectionApi not supported in current browser");
+    return false;
   } else if (
     selector.length < 1 ||
     typeof selector != "string" ||
@@ -23,22 +25,21 @@ exports.insection = (selector, scrollover) => {
       "; Invalid argument, please use a suitable class selector string."
     );
     return false;
+  } else {
+    window.document.body.classList.add("intersect");
   }
   let selectorClass = selector.replace(/^\./, "");
-  let selInit = window.document.querySelectorAll(
-    "body:not(.no-intersect) " + selector
-  );
-  window.document.body.classList.add("intersect");
+  let selInit = window.document.querySelectorAll("body.intersect " + selector);
 
   if (selInit.length > 0) {
     // this is the target which is observed
     for (let selEl of selInit) {
       // cue up animations (no-JS friendly) //
       selEl.classList.remove(selectorClass);
-      selEl.classList.add(selectorClass + "-start");
+      selEl.classList.add(selectorClass + "-" + cueSfix);
     }
 
-    let selStart = window.document.querySelectorAll(selector + "-start");
+    let selStart = window.document.querySelectorAll(selector + "-" + cueSfix);
     // configure the intersection observer instance
     let intersectionObserverOptions = {
       root: null,
@@ -49,10 +50,13 @@ exports.insection = (selector, scrollover) => {
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        entry.target.classList.toggle(scrollover, entry.intersectionRatio > 0);
+        entry.target.classList.toggle(
+          selectorClass + "-" + vueSfix,
+          entry.intersectionRatio > 0
+        );
         if (entry.intersectionRatio > 0) {
           // Start Anim / Stop watching //
-          entry.target.classList.remove(selectorClass + "-start");
+          entry.target.classList.remove(selectorClass + "-" + cueSfix);
           observer.unobserve(entry.target);
         }
       });

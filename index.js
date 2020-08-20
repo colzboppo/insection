@@ -15,7 +15,7 @@ exports.insection = (
     persist = true,
     cueFix = "cue",
     vueFix = "vue",
-  }
+  } = {}
 ) => {
   // detect browser support for scroll animation with intersect //
 

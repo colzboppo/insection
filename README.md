@@ -2,11 +2,11 @@
 Module that accepts and monitors a selector for intersection with the viewport (scroll into view) in vanillaJS
 
 
-## install
+## Install
 ``` $ npm install @colzboppo/insection```
 
 
-## usage
+## Usage
 
 Add this import code to your `app.js` file.
 

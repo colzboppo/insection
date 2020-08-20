@@ -15,11 +15,7 @@ exports.insection = (selector) => {
   ) {
     console.log("intersectionApi not supported in current browser");
     return false;
-  } else if (
-    selector.length < 1 ||
-    typeof selector != "string" ||
-    selector[0] != "."
-  ) {
+  } else if (selector.length < 1 || typeof selector != "string") {
     console.log(
       selector,
       "; Invalid argument, please use a suitable class selector string."
@@ -28,18 +24,22 @@ exports.insection = (selector) => {
   } else {
     window.document.body.classList.add("intersect");
   }
-  let selectorClass = selector.replace(/^\./, "");
-  let selInit = window.document.querySelectorAll("body.intersect " + selector);
+  let selectorClass = "." + selector;
+  let selInit = window.document.querySelectorAll(
+    "body.intersect " + selectorClass
+  );
 
   if (selInit.length > 0) {
     // this is the target which is observed
     for (let selEl of selInit) {
       // cue up animations (no-JS friendly) //
-      selEl.classList.remove(selectorClass);
-      selEl.classList.add(selectorClass + "-" + cueSfix);
+      selEl.classList.remove(selector);
+      selEl.classList.add(selector + "-" + cueSfix);
     }
 
-    let selStart = window.document.querySelectorAll(selector + "-" + cueSfix);
+    let selStart = window.document.querySelectorAll(
+      selectorClass + "-" + cueSfix
+    );
     // configure the intersection observer instance
     let intersectionObserverOptions = {
       root: null,
@@ -51,12 +51,12 @@ exports.insection = (selector) => {
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         entry.target.classList.toggle(
-          selectorClass + "-" + vueSfix,
+          selector + "-" + vueSfix,
           entry.intersectionRatio > 0
         );
         if (entry.intersectionRatio > 0) {
           // Start Anim / Stop watching //
-          entry.target.classList.remove(selectorClass + "-" + cueSfix);
+          entry.target.classList.remove(selector + "-" + cueSfix);
           observer.unobserve(entry.target);
         }
       });

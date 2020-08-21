@@ -12,7 +12,7 @@ Add this import code to your `app.js` file.
 
 ```
 const { insection } = require("@colzboppo/insection");
-insection("selector") 
+insection("selector", [{ config:options }]) 
 ```
 
 

@@ -1,6 +1,15 @@
 // contextClass = class to add to context when any intersect occurs (global) //
 // classTarget = so we can target a different element to our selector if required //
-
+let log = (msg, debug, type = "log") => {
+  if (debug) {
+    if (type === "log") {
+      console.log(this, "log", msg);
+    } else if (type === "error") {
+      console.error(this, "error", msg);
+    }
+  }
+};
+let debug;
 exports.insection = (
   selector,
   {
@@ -14,6 +23,7 @@ exports.insection = (
     trackVisibility = false,
     reverseContextClass = false,
     preserveClass = false,
+    debug = false,
   } = {}
 ) => {
   // detect browser support for scroll animation with intersect //
@@ -22,12 +32,16 @@ exports.insection = (
     !("IntersectionObserverEntry" in window) ||
     !("intersectionRatio" in window.IntersectionObserverEntry.prototype)
   ) {
-    console.log("intersectionApi not supported in current browser");
+    log("intersectionApi not supported in current browser", true, "error");
     return false;
   } else if (selector.length < 1 || typeof selector != "string") {
-    console.log(
-      selector,
-      "; Invalid argument, please use a suitable class selector string."
+    log(
+      [
+        selector,
+        "; Invalid argument, please use a suitable class selector string.",
+      ],
+      true,
+      "error"
     );
     return false;
   } else {
@@ -47,8 +61,9 @@ exports.insection = (
     contextTar = context ? context : window.document.body;
   } else if (contextClass && typeof contextClass === "string") {
     // if more than one element and persist=true, this could become too much so pass warning and ignore //
-    console.log(
-      "context class given with multiple elements and persist=true, ignoring."
+    log(
+      "context class given with multiple elements and persist=true, ignoring.",
+      debug
     );
   }
 
@@ -57,7 +72,7 @@ exports.insection = (
     for (let selEl of selInit) {
       // cue up animations (no-JS friendly) //
       preserveClass
-        ? console.log("preserving selector class")
+        ? log("preserving selector class", debug)
         : selEl.classList.remove(selector);
       selEl.classList.add(selector + "-" + cueFix);
     }
@@ -113,9 +128,10 @@ exports.insection = (
       observer.observe(selEl);
     }
   } else {
-    console.log(
-      selInit,
-      "No elements found with provided selector, returning."
+    log(
+      [selInit, "No elements found with provided selector, returning."],
+      true,
+      "error"
     );
     return false;
   }

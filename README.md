@@ -29,6 +29,9 @@ Full set of config options:
   viewThreshold: 1 (default) // percentage of object in view when we trigger in view
   cueFix: "cue" (default) // class suffix when cued outside view
   vueFix: "vue" (default) // class suffix when scrolled into view
+  preserveClass: false (default) // to preserve the selector class of the elements set to true
+  contextClass: false (default) // add a class string to apply to our context on element view triggers [unstable when using with multiple elements]
+  reverseContextClass: false (default) // reverse our trigger to add class when trigger out of view of element
 }
 ```
 

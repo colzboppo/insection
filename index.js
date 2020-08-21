@@ -9,7 +9,8 @@ exports.insection = (
   {
     context = null,
     contextClass = "",
-    threshold = 1,
+    hideThreshold = 0.01,
+    viewThreshold = 1,
     persist = true,
     cueFix = "cue",
     vueFix = "vue",
@@ -52,13 +53,14 @@ exports.insection = (
     let intersectionObserverOptions = {
       root: context,
       rootMargin: "0px 0px 0px 0px",
-      threshold: threshold, // percentage of object to intersect as threshold
+      threshold: [hideThreshold, viewThreshold], // percentage of object to intersect as threshold
     };
 
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        let overThreshold = entry.intersectionRatio >= threshold;
+        let overThreshold = entry.intersectionRatio >= viewThreshold;
+        let notInView = entry.intersectionRatio <= hideThreshold;
         if (persist) {
           // toggles -vue class
           entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
@@ -67,9 +69,14 @@ exports.insection = (
             observer.unobserve(entry.target);
           }
         } else {
-          // toggles -cue class
-          entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
-          entry.target.classList.toggle(selector + "-" + cueFix, overThreshold);
+          // toggles -cue/-vue class
+          if (overThreshold) {
+            entry.target.classList.add(selector + "-" + vueFix);
+            entry.target.classList.remove(selector + "-" + cueFix);
+          } else if (notInView) {
+            entry.target.classList.remove(selector + "-" + vueFix);
+            entry.target.classList.add(selector + "-" + cueFix);
+          }
         }
       });
     }, intersectionObserverOptions);

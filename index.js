@@ -87,7 +87,7 @@ exports.insection = (
             contextTar ? contextTar.classList.add(contextClass) : null;
           }
         } else {
-          // toggles -cue/-vue class
+          // toggles -cue/-vue class persistently
           if (inView) {
             entry.target.classList.add(selector + "-" + vueFix);
             entry.target.classList.remove(selector + "-" + cueFix);

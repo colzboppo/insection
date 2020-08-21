@@ -76,19 +76,19 @@ exports.insection = (
     // instantiate our animation element observer
     let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        let overThreshold = entry.intersectionRatio >= viewThreshold;
+        let inView = entry.intersectionRatio >= viewThreshold;
         let notInView = entry.intersectionRatio <= hideThreshold;
         if (persist) {
           // toggles -vue class
-          entry.target.classList.toggle(selector + "-" + vueFix, overThreshold);
-          if (overThreshold) {
+          entry.target.classList.toggle(selector + "-" + vueFix, inView);
+          if (inView) {
             entry.target.classList.remove(selector + "-" + cueFix);
             observer.unobserve(entry.target);
             contextTar ? contextTar.classList.add(contextClass) : null;
           }
         } else {
           // toggles -cue/-vue class
-          if (overThreshold) {
+          if (inView) {
             entry.target.classList.add(selector + "-" + vueFix);
             entry.target.classList.remove(selector + "-" + cueFix);
             contextTar

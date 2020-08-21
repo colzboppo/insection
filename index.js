@@ -1,8 +1,4 @@
-// selector = selection for intersect //
-// context = selector (body by default) //
 // contextClass = class to add to context when any intersect occurs (global) //
-// threshold = threshold of intersection //
-// persist = true, if set to false it will not set unobserve and reset to -cue/-vue class when in/out of viewport //
 
 exports.insection = (
   selector,
@@ -14,6 +10,7 @@ exports.insection = (
     persist = true,
     cueFix = "cue",
     vueFix = "vue",
+    trackVisibility = false,
   } = {}
 ) => {
   // detect browser support for scroll animation with intersect //
@@ -54,6 +51,7 @@ exports.insection = (
       root: context,
       rootMargin: "0px 0px 0px 0px",
       threshold: [hideThreshold, viewThreshold], // percentage of object to intersect as threshold
+      trackVisibility,
     };
 
     // instantiate our animation element observer
@@ -84,6 +82,7 @@ exports.insection = (
       // provide the observer with a target
       observer.observe(selEl);
     }
+    console.log(observer);
   } else {
     console.log(
       selInit,

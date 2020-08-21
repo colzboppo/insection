@@ -23,11 +23,12 @@ An optional set of config parameters can be passed to the module when instantiat
 Full set of config options:
 ```
 {
-  persist: true (default) // if set to false -cue and -vue classes will re-toggle when scrolled out of view
-  context: document.body (default) // context with which to observe scrolling, useful for scrolling div's inside of the document
-  threshold: 1 (default) // the percentage of object in view when we trigger our -vue class, 1 = 100% of object, 0.01 = 1%
-  cueFix: "cue" (default) // the suffix to add to the class when cue'd for scroll into view
-  vueFix: "vue" (default) // the suffix to add to the class when scrolled into view according to our threshold
+  persist: true (default) // if set to false -cue and -vue classes will re-toggle when scrolled out and back into view
+  context: document.body (default) // context with which to observe scrolling, set to specific container with scroll
+  hideThreshold: 0.01 (default) // percentage of object in view when we trigger out of view
+  viewThreshold: 1 (default) // percentage of object in view when we trigger in view
+  cueFix: "cue" (default) // class suffix when cued outside view
+  vueFix: "vue" (default) // class suffix when scrolled into view
 }
 ```
 
